@@ -1,0 +1,13 @@
+#Abdullah Siddiqi, 1002435572, arman.mail.utoronto.ca
+
+Part 1 Explanation: 
+First run 'dig utoronto.ca' to get check its ip address and name servers. Second run "dig utoronto.ca MX" to check the name for the mail servers. to get the ip address of the mail server run 'dig <mail-server>'. the mailserver in this case was "utoronto-ca.mail.protection.outlook.com"
+
+Part 2 Explanation:
+First create a socket and then bind it to the local address and the given port. Then when for a query command. Once the query command is recieved, send the query command to the binded server. The binded server will then return the repsonse to the query. Send the binded server response back to the same address that originally sent the query command.
+
+Part 3 Explanation:
+Same concept as Part 2, except after you recieve the response from the binded server. First decode the response using scapy then change the ipaddress of the response (an.rdata field) to "1.2.3.4" and all of its name servers to "ns.dnslabattacker.net". Then send this modified response back to the same adress that originally send the query command.
+
+Part 4 Explanation:
+Create a query packet.Send the query packet to the binded server. Edit the response recieved by changing the ipadress of the response to "1.2.3.4" and all of its name servers to "ns.dnslabattacker.net". Now in a while loop,  Generate a random domain and concat '.example.com' to it and set it as domain name for the modified response packet and original query packet. Now send this modified query packet to my Binds port. Before i recieve the message from this port, i send a 100 modified response packets (all with their own random ids) to the query port that the bind server uses. This is in hope that the random id will match with the correct transaction ID. After that i just check if the response recieved back is hacked or not. If not, the while loop continues, otherwise it breaks, indication the attack was a success.

